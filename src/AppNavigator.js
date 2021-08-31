@@ -27,6 +27,7 @@ export default function AppNavigator(props) {
     REQUEST: 'Requesting Data',
     DONE: 'Loaded Successfully',
     PERMISSION: 'Please enable location permission',
+    FIRSTTIME: 'The App requires Internet for first time usage',
   };
 
   const hasLocationPermission = async () => {
@@ -51,15 +52,9 @@ export default function AppNavigator(props) {
     }
 
     if (status === PermissionsAndroid.RESULTS.DENIED) {
-      ToastAndroid.show(
-        'Location permission denied by user.',
-        ToastAndroid.LONG,
-      );
+      ToastAndroid.show('Permission refuser', ToastAndroid.LONG);
     } else if (status === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
-      ToastAndroid.show(
-        'Location permission revoked by user.',
-        ToastAndroid.LONG,
-      );
+      ToastAndroid.show('Ne plus demander de permission', ToastAndroid.LONG);
     }
 
     return false;
@@ -105,13 +100,13 @@ export default function AppNavigator(props) {
   const requestAPIData = () => {
     getData(location, (success, payload) => {
       if (success) {
-        console.log('DONE ', payload.data.restaurants);
         dispatch(setData(payload.data.restaurants));
         dispatch(setOffline(false));
         setLoadingStatus('DONE');
       } else {
         dispatch(setOffline(true));
-        setLoadingStatus('DONE');
+        if (restaurants.length > 0) setLoadingStatus('DONE');
+        else setLoadingStatus('FIRSTTIME');
       }
     });
   };
@@ -201,7 +196,9 @@ export default function AppNavigator(props) {
   function LoadingScreen() {
     return (
       <View style={Styles.LoadingScreen}>
-        <ActivityIndicator size={50} color="tomato" />
+        {LoadingStatus != 'PERMISSION' && LoadingStatus != 'FIRSTTIME' && (
+          <ActivityIndicator size={50} color="tomato" />
+        )}
         <Text style={Styles.LoadingText}>
           {LoadingStatusTexts[LoadingStatus]}
         </Text>

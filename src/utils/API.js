@@ -1,6 +1,5 @@
 import axios from 'axios';
 export const getData = (location, callback) => {
-  console.log('AXIOS GETTING DATA ', location);
   const {latitude, longitude} = location.coords;
   axios
     .get(

@@ -12,7 +12,6 @@ export default function RestaurantRow(props) {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    console.log('Favorites updated', favorites);
     setIsFavorite(
       favorites.filter(restaurant => restaurant.id == id).length > 0,
     );

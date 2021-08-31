@@ -11,7 +11,6 @@ export default function RestaurantMarker(props) {
   const favorites = useSelector(state => state.data.favorites);
 
   useEffect(() => {
-    console.log('Favorites updated', favorites);
     setIsFavorite(
       favorites.filter(restaurant => restaurant.id == id).length > 0,
     );

@@ -1,4 +1,4 @@
-import {addFavorite} from '../../utils/addFavorite';
+import addFavorite from '../../utils/addFavorite';
 import removeFavorite from '../../utils/removeFavorite';
 
 const initialState = {
