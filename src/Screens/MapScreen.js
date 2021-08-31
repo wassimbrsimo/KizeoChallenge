@@ -25,7 +25,7 @@ export default function MapScreen(props) {
         onMapReady={() =>
           setTimeout(() => {
             setTrackViewChanges(false);
-          }, 200)
+          }, 2000)
         }>
         {restaurants &&
           restaurants.map((marker, index) => {

@@ -1,3 +1,6 @@
+import {addFavorite} from '../../utils/addFavorite';
+import removeFavorite from '../../utils/removeFavorite';
+
 const initialState = {
   Location: null,
   restaurants: [],
@@ -17,13 +20,12 @@ const dataReducer = (state = initialState, {type, payload}) => {
       return {...state, isOffline: payload};
     }
     case 'FAVORITE': {
-      let favoritesArray = state.favorites.concat(payload);
-      return {...state, favorites: favoritesArray};
+      return {...state, favorites: addFavorite(state.favorites, payload)};
     }
     case 'REMOVE_FAVORITE': {
       return {
         ...state,
-        favorites: state.favorites.filter(item => item.id != payload.id),
+        favorites: removeFavorite(state.favorites, payload),
       };
     }
     default: {

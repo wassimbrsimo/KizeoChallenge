@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import {PermissionsAndroid, Platform, ToastAndroid} from 'react-native';
 import DetailsScreen from './Screens/DetailsScreen';
 import MapScreen from './Screens/MapScreen';
@@ -201,7 +201,10 @@ export default function AppNavigator(props) {
   function LoadingScreen() {
     return (
       <View style={Styles.LoadingScreen}>
-        <Text>{LoadingStatusTexts[LoadingStatus]}</Text>
+        <ActivityIndicator size={50} color="tomato" />
+        <Text style={Styles.LoadingText}>
+          {LoadingStatusTexts[LoadingStatus]}
+        </Text>
       </View>
     );
   }
@@ -216,7 +219,8 @@ const Styles = StyleSheet.create({
   LoadingScreen: {
     flex: 1,
     backgroundColor: 'white',
-    alignSelf: 'center',
+    alignItems: 'center',
     justifyContent: 'center',
   },
+  LoadingText: {fontWeight: 'bold', fontSize: 16},
 });
