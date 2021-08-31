@@ -1,0 +1,6 @@
+module Pods_KizeoChallenge_KizeoChallengeTests {
+  umbrella header "Pods-KizeoChallenge-KizeoChallengeTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
