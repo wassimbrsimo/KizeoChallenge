@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet} from 'react-native';
 import MapView from 'react-native-maps';
 import {Marker} from 'react-native-maps';
 import {useSelector} from 'react-redux';
@@ -14,7 +14,7 @@ export default function MapScreen(props) {
     <View style={Styles.container}>
       <ConnectingStatus />
       <MapView
-        style={{top: 0, bottom: 0, left: 0, right: 0, position: 'absolute'}}
+        style={Styles.mapStyle}
         initialRegion={{
           latitude: location.coords.latitude,
           longitude: location.coords.longitude,
@@ -48,4 +48,5 @@ export default function MapScreen(props) {
 }
 const Styles = StyleSheet.create({
   container: {flex: 1},
+  mapStyle: {top: 0, bottom: 0, left: 0, right: 0, position: 'absolute'},
 });
